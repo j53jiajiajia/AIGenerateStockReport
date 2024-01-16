@@ -42,7 +42,7 @@ def get_target_text(url):
         ]
     )
     content = response.choices[0].message.content.strip()
-    print(content)
+    # print(content)
 
     dict_target_text = {}
     # keywords = ["***核心观点：", "***事件点评分析：", "***风险提示：", "***投资建议："]
