@@ -7,7 +7,9 @@ from get_valuation import get_valuation
 from openai import OpenAI
 import yfinance as yf
 from datetime import datetime
-from get_keys import get_openai
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def generate_report_title(symbol, name, dict_target_text1, dict_target_text2, all_content_text):
     title1 = dict_target_text1["title"]
@@ -15,7 +17,7 @@ def generate_report_title(symbol, name, dict_target_text1, dict_target_text2, al
 
     # make openai to generate comment idea for our report
     client = OpenAI(
-        api_key=get_openai(),
+        api_key=os.getenv('OPENAI_API_KEY'),
     )
 
     response = client.chat.completions.create(

@@ -15,8 +15,8 @@ def generate_total_report(symbol, name):
         draw_rating_details_table(symbol, name)
         generate_xtrafin_rating(symbol, name)
 
-        # add_content_to_pdf(symbol, name, "template.pdf", dict_report_content)    # 生成只有一页不带免责声明的研报
-        add_content_to_pdf(symbol, name, "template_with_statement.pdf", dict_report_content)    # 生成两页带免责声明的研报
+        add_content_to_pdf(symbol, name, "template.pdf", dict_report_content)    # 生成只有一页不带免责声明的研报
+        # add_content_to_pdf(symbol, name, "template_with_statement.pdf", dict_report_content)    # 生成两页带免责声明的研报
 
 
 # generate_total_report('300750.SZ', "宁德时代")

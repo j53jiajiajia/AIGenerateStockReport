@@ -1,6 +1,4 @@
 import requests
-from openai import OpenAI
-from get_keys import get_openai
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
@@ -24,18 +22,18 @@ def get_xtrafin_rating(symbol):
         # else:  # Data is available
         #     print("get data successfully")
 
-        analysis = data['analysis']
-        client = OpenAI(
-            api_key=get_openai(),
-        )
-
-        response = client.chat.completions.create(
-            model="gpt-4-1106-preview",
-            messages=[
-                {"role": "user",
-                 "content": f"{analysis}\n这是{symbol}股票的英文大模型分析，请把它翻译成中文。\n请注意，请直接返回中文翻译，不要有任何提示词，如：以下为翻译等"}
-            ]
-        )
+        # analysis = data['analysis']
+        # client = OpenAI(
+        #     api_key=get_openai(),
+        # )
+        #
+        # response = client.chat.completions.create(
+        #     model="gpt-4-1106-preview",
+        #     messages=[
+        #         {"role": "user",
+        #          "content": f"{analysis}\n这是{symbol}股票的英文大模型分析，请把它翻译成中文。\n请注意，请直接返回中文翻译，不要有任何提示词，如：以下为翻译等"}
+        #     ]
+        # )
         dict_xtrafin = {}
         dict_xtrafin['技术评分'] = data['rating']
         dict_xtrafin['市场情绪'] = '积极' if data['sentiment'] == 'positive' else '中性' if data['sentiment'] == 'neutral' else '消极'

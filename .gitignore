@@ -1,4 +1,4 @@
 try*.py
 __pycache__/
 .idea/
-get_keys.py
+.env

@@ -1,7 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
-from get_keys import get_openai
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def get_analyst_data(symbol):
     # 根据url对symbol的格式进行调整
@@ -25,7 +27,7 @@ def get_analyst_data(symbol):
     analyst_price_text = ""
     analyst_price_text += "Up to " + soup.find('p', class_='updated-time').get_text() + ", "
     analyst_price_text += soup.find('p', class_='tarrget-desc').get_text() + ", "
-    analyst_price_text += "Current price is " + soup.find('div', class_='price-current').get_text().split()[0] + ". "
+    analyst_price_text += "Current price is " + soup.find('div', class_='price-normal').get_text().split()[0] + ". "
     # print(analyst_price_text)
 
     analyst_data = analyst_rating_text + "\n" + analyst_price_text
@@ -37,7 +39,7 @@ def get_analyst_analysis(symbol, name):
 
     # make openai to make analysis of the analyst data
     client = OpenAI(
-        api_key=get_openai(),
+        api_key=os.getenv('OPENAI_API_KEY'),
     )
 
     response = client.chat.completions.create(

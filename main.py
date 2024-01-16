@@ -29,15 +29,17 @@ def process_user_input(s):
     conn.close()
 
 # Examples
-# process_user_input('比亚迪')
+process_user_input('比亚迪')
+# process_user_input('长白山')
+# process_user_input('贵州茅台')
 # process_user_input('万科Ａ')
 # process_user_input('五芳斋')
 # process_user_input('000078.SZ')    #找不到相关信息的股票
 # process_user_input('阳光电源')
 # process_user_input('老板电器')
 # process_user_input('000338.SZ')
-process_user_input('600223.SH')
-process_user_input('山西汾酒')
+# process_user_input('600223.SH')
+# process_user_input('山西汾酒')
 
 
 

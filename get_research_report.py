@@ -2,8 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
 import re
-from get_keys import get_openai
-import sys
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
 
@@ -25,20 +27,22 @@ def get_raw_content_from_url(url):
 # get_raw_content_from_url(url)
 
 def get_target_text(url):
+    openai_key = os.getenv('OPENAI_API_KEY')
+    # print(openai_key)
     title, clean_text = get_raw_content_from_url(url)
     # 让openai提取target_text(***核心观点：***事件点评分析：***风险提示：***投资建议：)
     client = OpenAI(
-        api_key=get_openai(),
+        api_key=openai_key,
     )
 
     response = client.chat.completions.create(
         model="gpt-4-1106-preview",
         messages=[
-          {"role": "user", "content": f"{clean_text}\n在这段话中，有0或1段内容为核心观点（事件总结），有2或3段内容为事件点评分析，有1段内容为风险提示，有一段内容为投资建议，请分别把他们提取出来。\n请注意提取出来的内容应是整个原文段落，然后，你返回的内容格式应为：\n***核心观点：\n***事件点评分析：\n***风险提示：\n***投资建议："}
+          {"role": "user", "content": f"{clean_text}\n在这段话中，有0或1个段落内容为核心观点（事件总结），有2或3或4个段落内容为事件点评分析，有1个段落内容为风险提示，有1个段落内容为投资建议，请分别把他们提取出来。\n请注意提取出来的内容应是几个完整的段落原文，而不是段落中的一句话，然后，你返回的内容格式应为：\n***核心观点：\n***事件点评分析：\n***风险提示：\n***投资建议："}
         ]
     )
     content = response.choices[0].message.content.strip()
-    # print(content)
+    print(content)
 
     dict_target_text = {}
     # keywords = ["***核心观点：", "***事件点评分析：", "***风险提示：", "***投资建议："]
