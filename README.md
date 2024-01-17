@@ -11,7 +11,7 @@ If you want to generate the stock research reports for the top 10 hottest stocks
 ### Packages: 
 Please make sure that you have run  
 pip install -r requirements.txt  
-and put 华文楷体.ttf, 华文楷体-Bold.ttf, 华文黑体.ttf in the Lib\site-packages\reportlab\fonts file directory and Lib\site-packages\matplotlib\mpl-data\fonts before you run the code.
+and put KaiTi.ttf, KaiTi-Bold.ttf, and SimHei.ttf in the Lib\site-packages\reportlab\fonts file directory and \.fonts before you run the code.
 ### OpenAI Key:
 You should have one OpenAI Key and have .env to store OPENAI_API_KEY(OPENAI_API_KEY=******************************).
 ## Details
