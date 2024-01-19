@@ -9,9 +9,9 @@ from reportlab.platypus import Paragraph
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-pdfmetrics.registerFont(TTFont('KaiTi', '华文楷体.ttf'))
-pdfmetrics.registerFont(TTFont('KaiTi-Bold', '华文楷体-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('HeiTi', '华文黑体.ttf'))
+pdfmetrics.registerFont(TTFont('KaiTi', 'KaiTi.ttf'))
+pdfmetrics.registerFont(TTFont('KaiTi-Bold', 'KaiTi-Bold.ttf'))
+pdfmetrics.registerFont(TTFont('HeiTi', 'SimHei.ttf'))
 
 def apply_inline_style(text):
     # 将第一个句子放在加粗样式标签内

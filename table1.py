@@ -1,9 +1,10 @@
 import yfinance as yf
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 def draw_stock_data_table(symbol, name):
 
-    plt.rcParams["font.sans-serif"] = ["KaiTi"]  # 设置字体
+    plt.rcParams["font.sans-serif"] = ['STKaiti']  # 设置字体
     plt.rcParams["axes.unicode_minus"] = False  # 该语句解决图像中的“-”负号的乱码问题
 
     # 根据yahoo api对沪板块的股票symbol的格式进行调整(在yahoo api中，沪板块的股票代码为：xxxxxx.SS)

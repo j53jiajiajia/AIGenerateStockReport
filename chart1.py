@@ -4,7 +4,7 @@ from matplotlib.ticker import FuncFormatter, MultipleLocator
 
 def draw_trend_chart(symbol, name):
 
-    plt.rcParams["font.sans-serif"] = ["KaiTi"] #设置字体
+    plt.rcParams["font.sans-serif"] = ["STKaiTi"] #设置字体
     plt.rcParams["axes.unicode_minus"] = False #该语句解决图像中的“-”负号的乱码问题
 
     # 根据yahoo api对沪板块的股票symbol的格式进行调整(在yahoo api中，沪板块的股票代码为：xxxxxx.SS)

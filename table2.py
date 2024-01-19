@@ -37,7 +37,7 @@ def get_rating_details(symbol):
 
 
 def draw_rating_details_table(symbol, name):
-    plt.rcParams["font.sans-serif"] = ["KaiTi"]  # 设置字体
+    plt.rcParams["font.sans-serif"] = ["STKaiTi"]  # 设置字体
     plt.rcParams["axes.unicode_minus"] = False  # 该语句解决图像中的“-”负号的乱码问题
 
     df = get_rating_details(symbol)

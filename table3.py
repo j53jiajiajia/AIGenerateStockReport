@@ -2,7 +2,7 @@ import requests
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-plt.rcParams["font.sans-serif"] = ["KaiTi"]  # 设置字体
+plt.rcParams["font.sans-serif"] = ["STKaiTi"]  # 设置字体
 plt.rcParams["axes.unicode_minus"] = False  # 该语句解决图像中的“-”负号的乱码问题
 
 
