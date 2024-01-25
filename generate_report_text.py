@@ -44,6 +44,7 @@ def generate_report_text(symbol, name):
             all_content_text += subtitle + "\n"
             all_content_text += content + "\n"
         print(all_content_text)
+        dict_report_content["全部文本"] = all_content_text
         dict_report_content["报告标题"] = generate_report_title(symbol, name, dict_target_text1, dict_target_text2, all_content_text)
         dict_report_content["出版时期"] = datetime.now().strftime("%Y-%m-%d")
         dict_report_content["股票代码"] = symbol

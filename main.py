@@ -22,9 +22,13 @@ def process_user_input(s):
     if result:
         symbol, company_name = result
         print(f"我们正在生成股票{company_name}({symbol})的研报...")
-        generate_total_report(symbol, company_name)
+        if generate_total_report(symbol, company_name) == "Insufficient Info":
+            return "Insufficient Info"
+        else:
+            return "Success"
     else:
         print("找不到您输入的股票，请重新输入A股的股票代码或股票名称...")
+        return "Invalid Stock"
 
     conn.close()
 

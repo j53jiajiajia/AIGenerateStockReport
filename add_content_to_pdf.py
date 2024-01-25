@@ -1,4 +1,3 @@
-import os
 from PyPDF2 import PdfReader, PdfWriter
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -24,7 +23,7 @@ def apply_inline_style(text):
             # other_sentence = text[first_sentence_end:]
 
             if first_sentence_end > 0:
-                new_para = f"<font name='KaiTi-Bold'>{para[:first_sentence_end]}</font><font name='KaiTi'>{para[first_sentence_end:]}</font><br/>"
+                new_para = f"<font color={colors.darkblue} name='KaiTi-Bold'>{para[:first_sentence_end]}</font><font color={colors.black} name='KaiTi'>{para[first_sentence_end:]}</font><br/>"
                 # new_para = f"{para[:first_sentence_end]}{para[first_sentence_end:]}"
                 new_text = new_text + new_para
                 # text = text.replace(para, new_para)
@@ -79,14 +78,9 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
     pdf_canvas.drawImage(image3_path, 65, 280, width=170, height=80)  # Adjust the coordinates and dimensions as needed
 
     # 插入图像4
-    # 根据yahoo api对沪板块的股票symbol的格式进行调整(在yahoo api中，沪板块的股票代码为：xxxxxx.SS)
-    if symbol[-3:] == '.SH':
-        adjusted_symbol = symbol.replace('.SH', '.SS')
-        image3_path = f"图片/table3图片/table3_{name}({adjusted_symbol}).jpg"
-    else:
-        image3_path = f"图片/table3图片/table3_{name}({symbol}).jpg"
+    image4_path = f"图片/table3图片/table3_{name}({symbol}).jpg"
 
-    pdf_canvas.drawImage(image3_path, 65, 145, width=170, height=85)  # Adjust the coordinates and dimensions as needed
+    pdf_canvas.drawImage(image4_path, 65, 145, width=170, height=85)  # Adjust the coordinates and dimensions as needed
 
     # Set initial coordinates
     x = 255
@@ -103,7 +97,7 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
             name_width = 12*len(value.split("(")[0])
             pdf_canvas.drawString(490-name_width, 730, value)
         elif key == "出版时期":
-            pdf_canvas.setFont('HeiTi', 10.6)
+            pdf_canvas.setFont('HeiTi', 10.5)
             pdf_canvas.setFillColor(colors.grey)
             pdf_canvas.drawString(500, 760, value)
         elif key == "昨收盘: ":
@@ -114,7 +108,7 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
         elif key == "核心要点" or key == "点评分析" or key == "估值预测" or key == "风险提示":
             # Set bold and blue for subtitle
             pdf_canvas.setFont('KaiTi-Bold', 10.5)
-            pdf_canvas.setFillColor(colors.darkblue)
+            pdf_canvas.setFillColor(colors.blue)
             pdf_canvas.drawString(x, y, key)
             y -= 2
 
@@ -127,6 +121,7 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
             if key == "核心要点":
                 style.fontName = 'KaiTi-Bold'
                 style.fontSize = 10.5
+                style.textColor = colors.darkblue
 
             elif key == "点评分析":
                 value = apply_inline_style(value)
@@ -136,7 +131,7 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
             else:
                 style.fontName = 'KaiTi'
                 style.fontSize = 10.5
-
+                style.textColor = colors.black
 
             P = Paragraph(value, style)
             aW = 310  # Available width

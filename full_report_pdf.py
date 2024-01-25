@@ -3,8 +3,8 @@ from chart1 import draw_trend_chart
 from table1 import draw_stock_data_table
 from table2 import draw_rating_details_table
 from add_content_to_pdf import add_content_to_pdf
-from table3 import generate_xtrafin_rating
 from create_picture_dir import create_picture_dir
+from table3 import draw_prediction_table
 
 def generate_total_report(symbol, name):
     create_picture_dir()
@@ -13,10 +13,13 @@ def generate_total_report(symbol, name):
         draw_trend_chart(symbol, name)
         draw_stock_data_table(symbol, name)
         draw_rating_details_table(symbol, name)
-        generate_xtrafin_rating(symbol, name)
+        draw_prediction_table(dict_report_content, symbol, name)
 
         add_content_to_pdf(symbol, name, "template.pdf", dict_report_content)    # 生成只有一页不带免责声明的研报
         # add_content_to_pdf(symbol, name, "template_with_statement.pdf", dict_report_content)    # 生成两页带免责声明的研报
+        return "Success"
+    else:
+        return "Insufficient Info"
 
 
 # generate_total_report('300750.SZ', "宁德时代")

@@ -5,11 +5,13 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
+
 def get_analyst_data(symbol):
     # 根据url对symbol的格式进行调整
     symbol = symbol.replace('.', '-')
     url = f"https://www.moomoo.com/stock/{symbol}/analysis"
-    response = requests.get(url)
+    response = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(response.content, 'html.parser')
 
     # get the analyst rating of the given stock

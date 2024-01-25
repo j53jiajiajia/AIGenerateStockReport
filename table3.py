@@ -1,56 +1,44 @@
-import requests
+from openai import OpenAI
+import re
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 plt.rcParams["font.sans-serif"] = ["STKaiTi"]  # 设置字体
 plt.rcParams["axes.unicode_minus"] = False  # 该语句解决图像中的“-”负号的乱码问题
 
+def generate_prediction(dict_report_content, name):
+    all_content_text = dict_report_content["全部文本"]
+    
+    # make openai to generate rating and target price
+    client = OpenAI(
+        api_key=os.getenv('OPENAI_API_KEY'),
+    )
+    
+    response = client.chat.completions.create(
+        model="gpt-4-1106-preview",
+        messages=[
+          {"role": "user", "content": f"{all_content_text}\n以上是股票{name}的研报的主要内容，请仔细阅读，然后以一个金融分析师的角度，给出股票{name}的评级(买入/增持/持有/减持/卖出)和目标价格，请注意你给出的目标价格不能是平均目标股价，你应只返回你给出的股票评级和目标价格，且返回内容的格式为: ****股票评级：？\n****目标价格：？。"}
+        ]
+    )
+    content = response.choices[0].message.content.strip()
+    # print(content)
 
-def get_xtrafin_rating(symbol):
-    # Define the URL for the API endpoint
-    url = f'https://fin-gpt.org/analysis/{symbol}'
-    # print(f"Requesting data from {url}...")
-    # Make a GET request to the API
-    response = requests.get(url)
-    # Check the status of the response
-    if response.status_code == 200:
-        # The request was successful
-        data = response.json()  # Parse JSON data from the response
-        # print(f"Data received")
-        # if 'error' in data:  # No data loaded for the symbol
-        #     print(f"Error: {data['error']}")
-        # else:  # Data is available
-        #     print("get data successfully")
+    # Extract the rating and target price
+    rating_match = re.search(r"股票评级：(\w+)", content)
+    target_price_match = re.search(r"目标价格：(\d+)", content)
 
-        # analysis = data['analysis']
-        # client = OpenAI(
-        #     api_key=get_openai(),
-        # )
-        #
-        # response = client.chat.completions.create(
-        #     model="gpt-4-1106-preview",
-        #     messages=[
-        #         {"role": "user",
-        #          "content": f"{analysis}\n这是{symbol}股票的英文大模型分析，请把它翻译成中文。\n请注意，请直接返回中文翻译，不要有任何提示词，如：以下为翻译等"}
-        #     ]
-        # )
-        dict_xtrafin = {}
-        dict_xtrafin['技术评分'] = data['rating']
-        dict_xtrafin['市场情绪'] = '积极' if data['sentiment'] == 'positive' else '中性' if data['sentiment'] == 'neutral' else '消极'
-        dict_xtrafin['技术面分析'] = f'https://fin-gpt.org/symbol/{symbol}'
+    dict_prediction = {}
+    dict_prediction['股票评级'] = rating_match.group(1) if rating_match else "暂无"
+    dict_prediction['目标价格'] = target_price_match.group(1) if target_price_match else "暂无"
+    
+    # print(dict_prediction)
+    return  dict_prediction
 
-        # print(dict_xtrafin)
-        return dict_xtrafin
-
-# get_xtrafin_rating('300750.SZ')
-
-def generate_xtrafin_rating(symbol, name):
-    # 根据yahoo api对沪板块的股票symbol的格式进行调整(在yahoo api中，沪板块的股票代码为：xxxxxx.SS)
-    if symbol[-3:] == '.SH':
-        symbol = symbol.replace('.SH', '.SS')
-
-    dict_xtrafin = get_xtrafin_rating(symbol)
-    # dict_xtrafin = {'技术评分': '50', '市场情绪': '消极', '详情分析': 'https://fin-gpt.org/symbol/300750.SZ'}
+def draw_prediction_table(dict_report_content, symbol, name):
+    dict_prediction = generate_prediction(dict_report_content, name)
 
     # Create figure and axes
     fig, ax = plt.subplots(figsize=(3.0, 1.5))
@@ -59,12 +47,9 @@ def generate_xtrafin_rating(symbol, name):
     rect = patches.Rectangle((0.01, 0.01), 0.98, 0.9, linewidth=2, edgecolor='w', facecolor='w')
 
     # Add text inside the rectangle
-    for i, (key, value) in enumerate(dict_xtrafin.items()):
+    for i, (key, value) in enumerate(dict_prediction.items()):
         text = f"{key}: {value}"
-        if i == 0 or i == 1:
-            ax.text(0.05, 0.7 - i * 0.3, text, color='black', fontsize=14, weight='bold')
-        else:
-            ax.text(0.05, 0.7 - i * 0.25, text, color='black', fontsize=6)
+        ax.text(0.05, 0.7 - i * 0.4, text, color='black', fontsize=14, weight='bold')
 
 
     # Add the patch to the Axes
@@ -74,4 +59,5 @@ def generate_xtrafin_rating(symbol, name):
     image_path = f"图片/table3图片/table3_{name}({symbol}).jpg"
     fig.savefig(image_path, dpi=400, bbox_inches='tight', pad_inches=0.05)
 
-# generate_xtrafin_rating('300750.SZ', "宁德时代")
+
+# draw_prediction_table(dict_report_content, 600519.SH', "贵州茅台")
