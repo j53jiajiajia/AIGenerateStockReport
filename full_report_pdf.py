@@ -5,6 +5,7 @@ from table2 import draw_rating_details_table
 from add_content_to_pdf import add_content_to_pdf
 from create_picture_dir import create_picture_dir
 from table3 import draw_prediction_table
+from chart2 import draw_technical_indicators
 
 def generate_total_report(symbol, name):
     create_picture_dir()
@@ -14,9 +15,10 @@ def generate_total_report(symbol, name):
         draw_stock_data_table(symbol, name)
         draw_rating_details_table(symbol, name)
         draw_prediction_table(dict_report_content, symbol, name)
+        draw_technical_indicators(symbol, name)
 
-        add_content_to_pdf(symbol, name, "template.pdf", dict_report_content)    # 生成只有一页不带免责声明的研报
-        # add_content_to_pdf(symbol, name, "template_with_statement.pdf", dict_report_content)    # 生成两页带免责声明的研报
+        # add_content_to_pdf(symbol, name, "template.pdf", dict_report_content)    # 生成只有一页不带免责声明的研报
+        add_content_to_pdf(symbol, name, "template_with_statement.pdf", dict_report_content)    # 生成两页带免责声明的研报
         return "Success"
     else:
         return "Insufficient Info"

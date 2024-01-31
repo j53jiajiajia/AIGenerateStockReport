@@ -51,11 +51,11 @@ def draw_stock_data_table(symbol, name):
     }
 
     # 创建一个无表头和无框线的表格
-    fig, ax = plt.subplots(figsize=(2.5, 1.5))
+    fig, ax = plt.subplots(figsize=(2.5, 1))
     ax.axis('off')  # 关闭坐标轴
 
     # 计算表格内容的纵向位置
-    y_positions = [0.9 - 0.15 * i for i in range(len(data))]
+    y_positions = [0.9 - 0.2 * i for i in range(len(data))]
 
     # 绘制表格内容，左对齐且右对齐
     for key, value in data.items():

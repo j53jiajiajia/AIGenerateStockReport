@@ -2,4 +2,3 @@ try*.py
 __pycache__/
 .idea/
 .env
-get_keys.py

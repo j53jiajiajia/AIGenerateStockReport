@@ -60,7 +60,7 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
     else:
         image1_path = f"图片/chart1图片/chart1_{name}({symbol}).jpg"
 
-    pdf_canvas.drawImage(image1_path, 65, 530, width=170, height=100)  # Adjust the coordinates and dimensions as needed
+    pdf_canvas.drawImage(image1_path, 65, 545, width=170, height=100)  # Adjust the coordinates and dimensions as needed
 
     # 插入图像2
     # 根据yahoo api对沪板块的股票symbol的格式进行调整(在yahoo api中，沪板块的股票代码为：xxxxxx.SS)
@@ -70,17 +70,27 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
     else:
         image2_path = f"图片/table1图片/table1_{name}({symbol}).jpg"
 
-    pdf_canvas.drawImage(image2_path, 65, 390, width=170, height=100)  # Adjust the coordinates and dimensions as needed
+    pdf_canvas.drawImage(image2_path, 65, 455, width=170, height=70)  # Adjust the coordinates and dimensions as needed
 
     # 插入图像3
-    image3_path = f"图片/table2图片/table2_{name}({symbol}).jpg"
+    # 根据yahoo api对沪板块的股票symbol的格式进行调整(在yahoo api中，沪板块的股票代码为：xxxxxx.SS)
+    if symbol[-3:] == '.SH':
+        adjusted_symbol = symbol.replace('.SH', '.SS')
+        image3_path = f"图片/chart2图片/chart2_{name}({adjusted_symbol}).jpg"
+    else:
+        image3_path = f"图片/chart2图片/chart2_{name}({symbol}).jpg"
 
-    pdf_canvas.drawImage(image3_path, 65, 280, width=170, height=80)  # Adjust the coordinates and dimensions as needed
+    pdf_canvas.drawImage(image3_path, 65, 326, width=130, height=108)  # Adjust the coordinates and dimensions as needed
 
     # 插入图像4
-    image4_path = f"图片/table3图片/table3_{name}({symbol}).jpg"
+    image4_path = f"图片/table2图片/table2_{name}({symbol}).jpg"
 
-    pdf_canvas.drawImage(image4_path, 65, 145, width=170, height=85)  # Adjust the coordinates and dimensions as needed
+    pdf_canvas.drawImage(image4_path, 65, 220, width=170, height=80)  # Adjust the coordinates and dimensions as needed
+
+    # 插入图像5
+    image5_path = f"图片/table3图片/table3_{name}({symbol}).jpg"
+
+    pdf_canvas.drawImage(image5_path, 65, 145, width=170, height=45)  # Adjust the coordinates and dimensions as needed
 
     # Set initial coordinates
     x = 255
@@ -181,6 +191,6 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
 #     "估值预测": "股票宁德时代300750.SZ当前市盈率(PE)为：16.18，预计该公司市盈率为：13.30，当前市盈率高于预计市盈率；当前市净率(PE)为：3.99；息税折旧摊销前利润(EBITDA)为：10.06。\n截至2023年12月10日，根据近三个月内48位分析师对宁德时代股票的评级判断，普遍给予强烈买入的建议。其中，有87.50%的分析师认定强烈买入，12.50%的分析师建议买入，没有分析师给出持有、未达标或卖出的建议。宁德时代的平均目标股价预计为330.10元，最高可能达到712.00元，而最低目标价设定在239.02元。考虑到当前股价为163.59元，市场对该公司股票的增值潜力保持高度信心，呈现出强烈的买入信号。",
 #     "风险提示": "原材料成本上涨风险、电动汽车市场需求疲软、储能产品销售不达标"
 # }
-#
+
 # # Example
-# add_content_to_pdf('300750.SZ', '宁德时代', "template.pdf", dict_report_content)
+# add_content_to_pdf('300750.SZ', '宁德时代', "template_with_statement.pdf", dict_report_content)

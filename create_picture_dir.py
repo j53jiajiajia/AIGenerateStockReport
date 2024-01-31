@@ -9,6 +9,7 @@ def create_dir(folder_name):
 def create_picture_dir():
     create_dir('图片')
     create_dir('图片/chart1图片')
+    create_dir('图片/chart2图片')
     create_dir('图片/table1图片')
     create_dir('图片/table2图片')
     create_dir('图片/table3图片')
