@@ -17,8 +17,8 @@ def generate_total_report(symbol, name):
         draw_prediction_table(dict_report_content, symbol, name)
         draw_technical_indicators(symbol, name)
 
-        # add_content_to_pdf(symbol, name, "template.pdf", dict_report_content)    # 生成只有一页不带免责声明的研报
-        add_content_to_pdf(symbol, name, "template_with_statement.pdf", dict_report_content)    # 生成两页带免责声明的研报
+        # add_content_to_pdf(symbol, name, "模板/template.pdf", dict_report_content)    # 生成只有一页不带免责声明的研报
+        add_content_to_pdf(symbol, name, "模板/template_with_statement.pdf", dict_report_content)    # 生成两页带免责声明的研报
         return "Success"
     else:
         return "Insufficient Info"
