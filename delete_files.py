@@ -43,4 +43,5 @@ def delete_jpg(folder_path):
 # delete_jpg('图片/table1图片')
 # delete_jpg('图片/table2图片')
 # delete_jpg('图片/table3图片')
+# delete_jpg('研报图片')
 

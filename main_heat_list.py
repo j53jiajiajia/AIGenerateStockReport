@@ -60,8 +60,8 @@ def generate_heat_list_stock_reports():
             print("找不到您输入的股票，请检查A股的股票代码或股票名称...")
 
 
-# Example
-generate_heat_list_stock_reports()
+# # Example
+# generate_heat_list_stock_reports()
 
 
 
