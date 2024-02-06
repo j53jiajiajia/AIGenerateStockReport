@@ -16,7 +16,7 @@ def convert_pdf_to_images(target_folder='研报图片'):
             base_name = os.path.splitext(os.path.basename(pdf_file))[0]
             
             # 将PDF文件的每一页转换为图片
-            pages = convert_from_path(pdf_file, 300)  # 300 DPI是一个比较好的折中选择
+            pages = convert_from_path(pdf_file, 400)  # 300 DPI是一个比较好的折中选择
             
             # 保存图片到指定的目录，图片名格式为原名.jpg
             for i, page in enumerate(pages):

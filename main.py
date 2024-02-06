@@ -33,7 +33,8 @@ def process_user_input(s):
     conn.close()
 
 # Examples
-process_user_input('比亚迪')
+# process_user_input('比亚迪')
+process_user_input('民生银行')
 # process_user_input('长白山')
 # process_user_input('贵州茅台')
 # process_user_input('万科Ａ')

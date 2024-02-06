@@ -9,7 +9,7 @@ If you want to give one stock symbol or company name and generate the stock rese
 If you want to generate the stock research reports for the top 10 hottest stocks, please use main_heat_list.py.(Example: generate_heat_list_stock_reports())
 ## Notice
 ### Packages: 
-Please make sure that you have already pip install -r requirements.txt and put KaiTi.ttf, KaiTi-Bold.ttf, SimHei.ttf in the Lib/site-packages/reportlab/fonts file directory, and if in ubuntu, put KaiTi.ttf in /usr/share/fonts/KaiTi/ file directory before you run the code.
+Please make sure that you have already pip install -r requirements.txt and put KaiTi.ttf, KaiTi-Bold.ttf, SimHei.ttf in the Lib/site-packages/reportlab/fonts file directory, and if in ubuntu, put KaiTi.ttf, KaiTi-Bold.ttf, SimHei.ttf, simkai.ttf, simsun.ttc in /usr/share/fonts/.../ file directory before you run the code.
 ### OpenAI Key:
 You should have one OpenAI Key and store it in a .env file.
 ## Details
