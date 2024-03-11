@@ -5,7 +5,7 @@ from full_report_pdf import generate_total_report
 path_to_db = "Ashares.sqlite3"
 #####################################################
 
-def process_user_input(s):
+def process_user_input(s, sent_time=''):
     s = s.replace(" ", "")
     s = s.replace("\t", "")
 
@@ -22,19 +22,18 @@ def process_user_input(s):
     if result:
         symbol, company_name = result
         print(f"我们正在生成股票{company_name}({symbol})的研报...")
-        if generate_total_report(symbol, company_name) == "Insufficient Info":
-            return "Insufficient Info"
-        else:
-            return "Success"
+        response = generate_total_report(symbol, company_name, sent_time)
     else:
         print("找不到您输入的股票，请重新输入A股的股票代码或股票名称...")
-        return "Invalid Stock"
-
+        response = "Invalid Stock"
+    
     conn.close()
+
+    return response
 
 # Examples
 # process_user_input('比亚迪')
-process_user_input('民生银行')
+# process_user_input('民生银行')
 # process_user_input('长白山')
 # process_user_input('贵州茅台')
 # process_user_input('万科Ａ')
@@ -44,7 +43,7 @@ process_user_input('民生银行')
 # process_user_input('老板电器')
 # process_user_input('000338.SZ')
 # process_user_input('600223.SH')
-# process_user_input('山西汾酒')
+# process_user_input('克来机电')
 
 
 

@@ -5,13 +5,13 @@ import sqlite3
 from full_report_pdf import generate_total_report
 
 #####################################################
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
 path_to_db = "Ashares.sqlite3"
 #####################################################
 def get_heat_list():
     url = "https://www.moomoo.com/quote/cn/most-active-stocks?from=futunn"
 
     # 发送GET请求获取页面内容
+    HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
     response = requests.get(url, headers=HEADERS)
     # 使用Beautiful Soup解析页面内容
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -55,7 +55,8 @@ def generate_heat_list_stock_reports():
         if result:
             symbol, company_name = result
             print(f"我们正在生成股票热榜第{rank}名: 股票{company_name}({symbol})的研报...")
-            generate_total_report(symbol, company_name)
+            info = generate_total_report(symbol, company_name)
+            print(info)
         else:
             print("找不到您输入的股票，请检查A股的股票代码或股票名称...")
 

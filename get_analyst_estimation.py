@@ -28,7 +28,7 @@ def get_analyst_data(symbol):
     # get the analyst stock price target of the given stock
     analyst_price_text = ""
     analyst_price_text += "Up to " + soup.find('p', class_='updated-time').get_text() + ", "
-    analyst_price_text += soup.find('p', class_='tarrget-desc').get_text() + ", "
+    analyst_price_text += soup.find('p', class_='tarrget-desc').get_text() + ", " if soup.find('p', class_='tarrget-desc') else "None, "
     analyst_price_text += "Current price is " + soup.find('div', class_='price-normal').get_text().split()[0] + ". "
     # print(analyst_price_text)
 

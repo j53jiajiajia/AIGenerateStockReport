@@ -34,7 +34,7 @@ def apply_inline_style(text):
         raise ValueError("apply_inline_style ERROR")
 
 
-def add_content_to_pdf(symbol, name, input_file_path, content):
+def add_content_to_pdf(symbol, name, input_file_path, content, sent_time=''):
     # 创建一个PDF读取对象和一个PDF写入对象
     pdf_reader = PdfReader(input_file_path)
     pdf_writer = PdfWriter()
@@ -174,11 +174,16 @@ def add_content_to_pdf(symbol, name, input_file_path, content):
         pdf_writer.add_page(pdf_reader.pages[i])
 
     # 将新的PDF写入到文件
-    output_file_path = f"{name}({symbol})研究报告.pdf"
+    if sent_time != '':
+        output_file_path = f"temp/{name}({symbol})研究报告({sent_time}).pdf"
+    else:
+        output_file_path = f"{name}({symbol})研究报告.pdf"
     with open(output_file_path, 'wb') as output_pdf:
         pdf_writer.write(output_pdf)
 
     print(f"PDF created successfully at: {output_file_path}")
+
+    return output_file_path
 
 # # Text content for the PDF
 # dict_report_content = {

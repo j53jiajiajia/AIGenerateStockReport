@@ -7,7 +7,7 @@ from create_picture_dir import create_picture_dir
 from table3 import draw_prediction_table
 from chart2 import draw_technical_indicators
 
-def generate_total_report(symbol, name):
+def generate_total_report(symbol, name, sent_time=''):
     create_picture_dir()
     dict_report_content = generate_report_text(symbol, name)
     if dict_report_content:
@@ -18,8 +18,8 @@ def generate_total_report(symbol, name):
         draw_technical_indicators(symbol, name)
 
         # add_content_to_pdf(symbol, name, "模板/template.pdf", dict_report_content)    # 生成只有一页不带免责声明的研报
-        add_content_to_pdf(symbol, name, "模板/template_with_statement.pdf", dict_report_content)    # 生成两页带免责声明的研报
-        return "Success"
+        file_path = add_content_to_pdf(symbol, name, "模板/template_with_statement.pdf", dict_report_content, sent_time)    # 生成两页带免责声明的研报
+        return file_path
     else:
         return "Insufficient Info"
 
