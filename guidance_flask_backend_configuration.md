@@ -37,15 +37,15 @@ This is the specific steps:
 6. Save the record.
 
 #### Second Step: configure an AWS EC2 instance to use HTTPS(install SSL certificate)
-1. Connect to Your EC2 Instance: SSH into your EC2 instance.
-2. Update Software Package List: sudo apt-get update 
-3. Install Certbot and Required Packages: sudo apt-get install certbot python3-certbot-nginx to install Certbot along with the necessary Python packages.
-4. Obtain and Install a Certificate: sudo certbot --nginx.
+1. Set the Security Groups to open port 80, 443.
+2. Connect to Your EC2 Instance: SSH into your EC2 instance.
+3. Update Software Package List: sudo apt-get update 
+4. Install Certbot and Required Packages: sudo apt-get install certbot python3-certbot-nginx to install Certbot along with the necessary Python packages.
+5. Obtain and Install a Certificate: sudo certbot --nginx.
 
 #### Third Step: use Nginx to transform ports
-1. Set the Security Groups to open port 80, 443.
-2. configure files under /etc/nginx/sites-available/ and /etc/nginx/sites-enabled to transform ports
-3. Execute command: python3 app.py to start the backend.
+1. configure files under /etc/nginx/sites-available/ and /etc/nginx/sites-enabled to transform ports
+2. Execute command: python3 app.py to start the backend.
 
 #### Forth Step: test it using Postman app
 1. choose "POST"
