@@ -2,9 +2,14 @@ import os
 import glob
 
 
-def delete_pdf():
-    # 获取当前目录下所有的PDF文件
-    pdf_files = glob.glob('*.pdf')
+def delete_pdf(folder_path=''):
+    if folder_path == '':
+        # 获取当前目录下所有的PDF文件
+        pdf_files = glob.glob('*.pdf')
+    else:
+        pdf_files_path = os.path.join(folder_path, '*.jpg')
+        # 获取文件夹下所有的.pdf文件
+        pdf_files = glob.glob(pdf_files_path)
 
     # 遍历文件列表，逐个删除
     for pdf_file in pdf_files:
@@ -37,30 +42,14 @@ def delete_jpg(folder_path):
 
     print(f"All JPG files in the {folder_path} folder have been deleted.")
 
-def delete_pdf(folder_path):
-    # 构造搜索路径来匹配所有的.pdf文件
-    pdf_files_path = os.path.join(folder_path, '*.pdf')
-
-    # 获取文件夹下所有的.pdf文件
-    pdf_files = glob.glob(pdf_files_path)
-
-    # 遍历文件列表，逐个删除
-    for pdf_file in pdf_files:
-        try:
-            os.remove(pdf_file)
-            print(f"Deleted: {pdf_file}")
-        except Exception as e:
-            print(f"Error deleting {pdf_file}: {e}")
-
-    print(f"All PDF files in the {folder_path} folder have been deleted.")
 
 # delete_pdf()
-delete_jpg('图片/chart1图片')
-delete_jpg('图片/chart2图片')
-delete_jpg('图片/table1图片')
-delete_jpg('图片/table2图片')
-delete_jpg('图片/table3图片')
+# delete_jpg('图片/chart1图片')
+# delete_jpg('图片/chart2图片')
+# delete_jpg('图片/table1图片')
+# delete_jpg('图片/table2图片')
+# delete_jpg('图片/table3图片')
 # delete_jpg('研报图片')
-delete_jpg('temp')
-delete_pdf('temp')
+# delete_jpg('temp')
+# delete_pdf('temp')
 
