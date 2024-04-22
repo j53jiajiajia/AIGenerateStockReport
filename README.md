@@ -12,10 +12,20 @@ If you want to generate the stock research reports for the top 10 hottest stocks
 Please make sure that you have already pip install -r requirements.txt and put KaiTi.ttf, KaiTi-Bold.ttf, SimHei.ttf in the Lib/site-packages/reportlab/fonts file directory, and if in ubuntu, put KaiTi.ttf, KaiTi-Bold.ttf, SimHei.ttf, simkai.ttf, simsun.ttc in /usr/share/fonts/.../ file directory before you run the code.
 ### OpenAI Key:
 You should have one OpenAI Key and store it in a .env file.
+### Running Instructions:
+Run the daily update of top 10 stock research report:
+```
+nohup ./run.sh &
+```
+Run the program on the bangbangday.com website:
+```
+nohup python3 app.py &
+nohup ./daily_run.sh &
+```
 ## Details
 Coverage: 90%+ A shares  
 Time: about 5 minutes per report  
-Cost: 0.066 US dollars (0.02 + 0.03 + 0.001 + 0.002 + 0.001 + 0.002 + + 0.01) = 0.5 RMB  
+Cost: 0.12 US dollars (0.02 + 0.03 + 0.01 + 0.02 + 0.01 + 0.02 + + 0.01) = 0.85 RMB  
 ## Chinese Promotion Introduction
 🌟【新上功能|AI自动生成股票研报】🌟  
 🔍【深度分析，洞察市场脉动】AI研报，汇聚大数据分析，洞悉行业趋势，为您提供全面而深入的市场分析。每一份研报，都是对过往数据的精准梳理，对未来走势的合理预测。  
