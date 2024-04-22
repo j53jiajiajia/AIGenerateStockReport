@@ -34,12 +34,13 @@ def generate_report():
     bucket_name = 'stockresearchreport'
     symbol = input_processing(stock)[0]
     company_name = input_processing(stock)[1]
-    # s3_pdf = f'stock_research_report_pdf/{company_name}({symbol})研究报告({sent_time}).pdf'
-    # s3_jpg1 = f'stock_research_report_jpg/{company_name}({symbol})研究报告({sent_time})_1.jpg'
-    # s3_jpg2 = f'stock_research_report_jpg/{company_name}({symbol})研究报告({sent_time})_2.jpg'
-    # url1 = f'https://s3.console.aws.amazon.com/s3/buckets/{bucket_name}?region=ap-southeast-1&bucketType=general&prefix={s3_pdf}'
-    # url2 = f'https://s3.console.aws.amazon.com/s3/buckets/{bucket_name}?region=ap-southeast-1&bucketType=general&prefix={s3_jpg1}'
-    # url3 = f'https://s3.console.aws.amazon.com/s3/buckets/{bucket_name}?region=ap-southeast-1&bucketType=general&prefix={s3_jpg2}'
+
+    s3_pdf = f'stock_research_report_pdf/{company_name}({symbol})研究报告({sent_time}).pdf'
+    s3_jpg1 = f'stock_research_report_jpg/{company_name}({symbol})研究报告({sent_time})_1.jpg'
+    s3_jpg2 = f'stock_research_report_jpg/{company_name}({symbol})研究报告({sent_time})_2.jpg'
+    url1 = f'https://s3.console.aws.amazon.com/s3/buckets/{bucket_name}?region=ap-southeast-1&bucketType=general&prefix={s3_pdf}'
+    url2 = f'https://s3.console.aws.amazon.com/s3/buckets/{bucket_name}?region=ap-southeast-1&bucketType=general&prefix={s3_jpg1}'
+    url3 = f'https://s3.console.aws.amazon.com/s3/buckets/{bucket_name}?region=ap-southeast-1&bucketType=general&prefix={s3_jpg2}'
     
     conn = sqlite3.connect(path_to_db)
     cursor = conn.cursor()
@@ -48,9 +49,12 @@ def generate_report():
     label = cursor.fetchone()[0]
     conn.close()
     if label == 1:
-        url1 = presigned_url(company_name, symbol, sent_time, 'pdf')
-        url2 = presigned_url(company_name, symbol, sent_time, 'jpg', '_1')
-        url3 = presigned_url(company_name, symbol, sent_time, 'jpg', '_2')
+        # url1 = presigned_url(company_name, symbol, sent_time, 'pdf')
+        # url2 = presigned_url(company_name, symbol, sent_time, 'jpg', '_1')
+        # url3 = presigned_url(company_name, symbol, sent_time, 'jpg', '_2')
+        url1 = url1
+        url2 = url2
+        url3 = url3
     else:
         url1, url2, url3 = '', '', ''
     response = {"user_id": user_id, "service_id": service_id, "label": label, "url1": url1, "url2": url2, "url3": url3}
